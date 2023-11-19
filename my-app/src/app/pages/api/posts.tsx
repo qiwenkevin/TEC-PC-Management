@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 
 export default async function handler(req: any, res: any) {
     if (req.method === 'GET') {
-        const client = new MongoClient(process.env, {
+        const client = new MongoClient(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

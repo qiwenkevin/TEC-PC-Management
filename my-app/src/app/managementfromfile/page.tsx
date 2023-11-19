@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Navbar } from "../Navbar/navbar";
 import { Bebas_Neue } from 'next/font/google';
 const bebas = Bebas_Neue({
@@ -7,12 +8,22 @@ const bebas = Bebas_Neue({
 });
 
 export default function Home() {
+    const [text, setText] = useState();
+
+    const load = function () {
+        fetch('./csvInPublicFolder.csv')
+            .then(response => response.text())
+            .then(responseText => {
+                setText(responseText);
+            })
+    };
 
     const RenderSeats = () => {
-        let test = []
-        let broken = [[2, 2], [3, 4], [0, 1]]
-        let taken = [[5, 3], [6, 7]]
-        let empty = [[1, 1]]
+        var data = $.csv.toObjects(csv):
+            let test = []
+        //let broken = [[2, 2], [3, 4], [0, 1]]
+        //let taken = [[5, 3], [6, 7]]
+        //let empty = [[1, 1]]
         for (let i = 0; i < 8; i++) {
             let cur = []
             for (let j = 1; j < 10; j++) {
