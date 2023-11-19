@@ -3,8 +3,10 @@ import mongoose, { Schema } from "mongoose";
 const topicSchema = new Schema(
     {
         title: String,
-        row: Int32,
-        col: Int32,
+        pid: String,
+        state: Number,
+        row: Number,
+        col: Number,
     },
     {
         timestamps: true,

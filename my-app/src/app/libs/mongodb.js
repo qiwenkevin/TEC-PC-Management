@@ -3,8 +3,7 @@ require('dotenv').config()
 
 const connectMongoDB = async () => {
     try {
-        //mongoose.connect(process.env.MONGODB_URI);
-        mongoose.connect("mongodb+srv://ethan:yk26vKeIrvs1F4Lv@msi-hackathon.6ubvlip.mongodb.net/?retryWrites=true&w=majority");
+        mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
         console.log("Connected to mongodb");
     }
     catch (error) {
