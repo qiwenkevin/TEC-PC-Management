@@ -1,0 +1,8 @@
+.back{
+    border-radius: 5px;
+    color: #425B69;
+    border: #425B69;
+}
+.back:hover{
+    background-color: #E8E7E7;
+}
