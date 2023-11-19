@@ -8,12 +8,13 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    colors: {
-      ucsd: '#425B69',
-    },
     extend: {
+      colors: {
+        ucsd: '#425B69',
+        rec: '#5A7D91',
+      },
       fontFamily: {
-        primary: "Bebas",
+        "primary": "Bebas",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

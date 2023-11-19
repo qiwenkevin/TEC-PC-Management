@@ -1,22 +1,12 @@
+import { Navbar } from "../Navbar/navbar";
+import { Bebas_Neue } from 'next/font/google';
+const bebas = Bebas_Neue({
+    weight: "400",
+    style: "normal",
+    subsets: ["latin"],
+});
+
 export default function Home() {
-    // const RenderSeat = () => {
-    //     let seatArray = [];
-    //     for (let key in seatDetails) {
-    //         let colValue = seatDetails[key].map((seatValue, rowIndex) => (
-    //             <span key={`${key}.${rowIndex}`} className={styles.seatsHolder}>
-    //                 {rowIndex === 0 && <span className={styles.colName}>{key}</span>}
-    //                 <span className={getClassNameForSeats(seatValue)} onClick={() => onSeatClick(seatValue, rowIndex, key)}>
-    //                     {rowIndex + 1}
-    //                 </span>
-    //                 {seatDetails && rowIndex === seatDetails[key].length - 1 && <><br /><br /></>}
-    //             </span>
-    //         ))
-    //         seatArray.push(colValue);
-    //     }
-    //     return (
-    //         <div className={styles.seatsLeafContainer}>{seatArray}</div>
-    //     )
-    // }
 
     const RenderSeats = () => {
         let test = []
@@ -35,19 +25,18 @@ export default function Home() {
                 var curEmpty = empty.some(elem => {
                     return JSON.stringify([i, j]) === JSON.stringify(elem);
                 });
-                let curStyle = "p-3 h-10 w-20 m-1"
+                let curStyle = "p-3 h-10 w-20 m-1 rounded-md items-center"
                 if (curEmpty) {
                     cur.push(<button className={`${curStyle}`}>{ }</button>)
                 }
                 else {
                     if (curBroken) {
-                        curStyle += " bg-slate-500"
+                        cur.push(<button className={`${curStyle} bg-slate-500`} disabled><span>{j}</span></button>)
                     } else if (curTaken) {
-                        curStyle += " bg-red-500"
+                        cur.push(<button className={`${curStyle} bg-red-500`} disabled>{j}</button>)
                     } else {
-                        curStyle += " bg-green-500"
+                        cur.push(<button className={`${curStyle} bg-green-500`}>{j}</button>)
                     }
-                    cur.push(<button className={`${curStyle}`}>{j}</button>)
                 }
 
             }
@@ -60,9 +49,33 @@ export default function Home() {
 
     return (
         <>
-            <div className="p-1 g-5">
-                <RenderSeats />
-            </div>
+            <div className=""><Navbar /></div>
+            <div className="h-screen bg-slate-100 p-10 place-items-center">
+                <div className="flex justify-around">
+                    <div className="grid grid-rows-3 w-60">
+                        <div className="flex flex-row gap-3 place-items-center">
+                            <div className="h-8 w-8 bg-green-500 rounded-md"></div>
+                            <p>- Avaliable</p>
+                        </div>
+                        <div className="flex flex-row gap-3 place-items-center">
+                            <div className="h-8 w-8 bg-red-500 rounded-md"></div>
+                            <p>- Avaliable</p>
+                        </div>
+                        <div className="flex flex-row gap-3 place-items-center">
+                            <div className="h-8 w-8 bg-slate-500 rounded-md"></div>
+                            <p>- Avaliable</p>
+                        </div>
+                    </div>
+                    <div className="grid place-items-center">
+                        <h1 className={`${bebas.className} text-rec text-5xl`}>Successfully Checked In!</h1>
+                        <h2 className={`${bebas.className} text-rec text-3xl p-5`}>Choose PC</h2>
+                    </div>
+                    <div className="w-60"></div>
+                </div >
+                <div className="grid place-items-center">
+                    <RenderSeats />
+                </div>
+            </div >
         </>
     )
 }
