@@ -1,4 +1,5 @@
-import type { Config } from 'tailwindcss'
+
+
 
 const config: Config = {
   content: [
@@ -7,7 +8,13 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      ucsd: '#425B69',
+    },
     extend: {
+      fontFamily: {
+        primary: "Bebas",
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
