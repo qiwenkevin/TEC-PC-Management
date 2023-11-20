@@ -1,52 +1,68 @@
 import { Navbar } from "../Navbar/navbar";
 import { Bebas_Neue } from 'next/font/google';
+import {GET} from "../api/deskdata/route";
+import RenderSeats from '../renderseats/renderseats'
+
 const bebas = Bebas_Neue({
     weight: "400",
     style: "normal",
     subsets: ["latin"],
 });
 
-export default function Home() {
+const loadDataFromServer = async ()=> {
+    const jres = await GET()
+    // const jres = response.json();
+    console.log(jres)
+    return jres
+}
 
-    const RenderSeats = () => {
-        let test = []
-        let broken = [[2, 2], [3, 4], [0, 1]]
-        let taken = [[5, 3], [6, 7]]
-        let empty = [[1, 1]]
-        for (let i = 0; i < 8; i++) {
-            let cur = []
-            for (let j = 1; j < 10; j++) {
-                var curBroken = broken.some(elem => {
-                    return JSON.stringify([i, j]) === JSON.stringify(elem);
-                });
-                var curTaken = taken.some(elem => {
-                    return JSON.stringify([i, j]) === JSON.stringify(elem);
-                });
-                var curEmpty = empty.some(elem => {
-                    return JSON.stringify([i, j]) === JSON.stringify(elem);
-                });
-                let curStyle = "h-10 w-20 rounded-md font-mono m-2"
-                if (curEmpty) {
-                    cur.push(<button className={`${curStyle}`} disabled>{"‎"}</button>)
-                }
-                else {
-                    if (curBroken) {
-                        cur.push(<button className={`${curStyle} bg-slate-500`} disabled>{i.toString() + j.toString()}</button>)
-                    } else if (curTaken) {
-                        cur.push(<button className={`${curStyle} bg-red-500`} disabled>{i.toString() + j.toString()}</button>)
-                    } else {
-                        cur.push(<button className={`${curStyle} bg-green-500 hover:bg-green-400 active:scale-90 transform transition-transform active:drop-shadow-md`}>{i.toString() + j.toString()}</button>)
-                    }
-                }
+export default async function Home() {
+    var seatdata = await loadDataFromServer()
 
-            }
-            test.push(<div>{cur}</div>)
-        }
-        return (
-            <div>{test}</div>
-        )
-    }
+    // const RenderSeats = () => {
+    //     let test = []
+    //     let broken = [[2, 2], [3, 4]]
+    //     let taken = [[0, 1], [2, 3], [4, 6]]
+    //     let empty = [[1, 1]] 
+    //     for (let i = 0; i < 8; i++) {
+    //         let cur = []
+    //         for (let j = 0; j < 9; j++) {
+    //             var curBroken = false
+    //             var curTaken = false
+    //             var curEmpty = false
+    //             var curDeskIndex = 0
+    //             for (let k = 0; k < Object.keys(seatdata.desks).length; k++){
+    //                 curDeskIndex = 0
+    //                 let temp = seatdata.desks[k]
+    //                 if (temp.row == i && temp.col == j){
+    //                     curDeskIndex = k
+    //                     if (temp.state == 0){curEmpty = true}
+    //                     else if (temp.state == 1){curBroken = true}
+    //                     else if (temp.state == 2){curTaken = true}
+    //                 } 
+    //             }
+    //             let curStyle = "p-3 h-10 w-20 m-1 rounded-md items-center font-mono"
+    //             if (curEmpty) { 
+    //                 cur.push(<button className={`${curStyle} bg-green-500 hover:bg-green-400 active:scale-90 transform transition-transform active:drop-shadow-md`}>{(seatdata.desks[curDeskIndex].title)}</button>)
 
+    //             }
+    //             else {
+    //                 if (curBroken) {
+    //                     cur.push(<button className={`${curStyle} bg-slate-500`} disabled><span>{(seatdata.desks[curDeskIndex].title)}</span></button>)
+    //                 } else if (curTaken) {
+    //                     cur.push(<button className={`${curStyle} bg-red-500`} disabled>{(seatdata.desks[curDeskIndex].title)}</button>)
+    //                 } else {
+    //                     cur.push(<button className={`${curStyle}`}>{"‎"}</button>)
+    //                 }
+    //             }
+ 
+    //         }
+    //         test.push(<div>{cur}</div>)
+    //     }
+    //     return (
+    //         <div>{test}</div>
+    //     )
+    // }
     return (
         <>
             <div className=""><Navbar /></div>
@@ -73,7 +89,7 @@ export default function Home() {
                     <div className="w-60"></div>
                 </div >
                 <div className="grid place-items-center">
-                    <RenderSeats />
+                    <RenderSeats seatdata={(seatdata)} />
                 </div>
             </div >
         </>

@@ -9,7 +9,11 @@ export async function GET() {
     try {
         connectMongoDB();
         const desks = await Desk.find();
-        return NextResponse.json({desks});
+        //desks.sort({ row: 1 })
+        //console.log("start")
+        //console.log({desks})
+        return {desks};
+        //return NextResponse.json({desks});
         //return {props: {desks}};
     } catch (error) {
         return NextResponse.json({ error: `Failed because of ${error}` }, { status: 500 });  
